@@ -12,7 +12,7 @@ from templates.sneat import TemplateLayout
 class ReglamentoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = ReglamentoForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_reglamentos.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

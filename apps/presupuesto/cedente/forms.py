@@ -5,7 +5,6 @@ class CedenteForm(forms.ModelForm):
     class Meta:
         model = Cedente
         fields = [
-            "idc",
             "partidac",
             "generalc",
             "espefc",

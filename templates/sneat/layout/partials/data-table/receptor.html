@@ -1,0 +1,114 @@
+{% extends layout_path %}
+
+{% load static %}
+
+{% block title %}{{ titlePage }}{% endblock %}
+
+{% block breadcrumbs %}
+<span class="text-muted fw-light">
+  <a href="../" class="text-muted fw-light">{{ module }}</a> /
+</span>
+<span class="">{{ submodule }}</span>
+{% endblock %}
+
+{% block btnAdd %}
+{% if isSelect %}
+<div class="mb-4">
+  <select class="form-select" id="select-options">
+    <option selected>{{ selectTitle }}</option>
+    {% for value, label in selectOptions %}
+    <option value="{{ value }}">{{ label }}</option>
+    {% endfor %}
+  </select>
+</div>
+{% else %}
+<a href="{{ createUrl }}" class="btn btn-outline-primary">
+  <span class="tf-icons bx bx-plus me-1"></span>{{ createBtn }}
+</a>
+{% endif %}
+
+{% if exportExcelUrl %}
+<a href="{{ exportExcelUrl }}" class="btn btn-outline-primary">
+  <span class="tf-icons bx bx-plus me-1"></span>Exportar a Excel
+</a>
+{% endif %}
+
+{% if exportPdfUrl %}
+<a href="{{ exportPdfUrl }}" class="btn btn-outline-primary">
+  <span class="tf-icons bx bx-plus me-1"></span>Exportar a Pdf
+</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive text-nowrap">
+      <table id="data-table" class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Partida Receptor</th>
+            <th>General Receptor</th>
+            <th>Especificaciones Receptor</th>
+            <th>Sub-Especialidad</th>
+            <th>Denominación Receptor</th>
+            <th>Presupuesto Acordado</th>
+            <th>Causado a la Fecha</th>
+            <th>Disponible a Causar</th>
+            <th>Monto a Receptor</th>
+            <th>Saldo Final</th>
+            <th>Dirección Receptora</th>
+          </tr>
+        </thead>
+        <tbody class=" table-border-bottom-0">
+          {% for archivo in columns %}
+          <tr>
+            <td>{{ archivo.id }}</td>
+            <td>{{ archivo.partidar }}</td>
+            <td>{{ archivo.generalr }}</td>
+            <td>{{ archivo.espefr }}</td>
+            <td>{{ archivo.subespefr }}</td>
+            <td>{{ archivo.denomr }}</td>
+            <td>{{ archivo.presuacorr }}</td>
+            <td>{{ archivo.caufechar }}</td>
+            <td>{{ archivo.dispr }}</td>
+            <td>{{ archivo.montocr }}</td>
+            <td>{{ archivo.saldofr }}</td>
+            <td>{{ archivo.direccionr }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block vendor_css %}
+<link rel="stylesheet" href="{% static 'vendor/libs/data-tables/css/dataTables.bootstrap5.css' %}">
+{% endblock %}
+
+{% block vendor_js %}
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.js' %}"></script>
+<script src="{% static 'vendor/libs/data-tables/js/dataTables.bootstrap5.js' %}"></script>
+{% endblock %}
+
+{% block page_js %}
+<script src="{% static 'js/data-table.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#select-options').change(function () {
+      const createUrl = "{{ createUrl }}"
+      let valorSeleccionado = $(this).val();
+      window.location.href = createUrl.replace("0", valorSeleccionado);
+    });
+    const url = "{{ listApiUrl }}"
+    const updateUrl = "{{ updateUrl }}"
+    const deleteUrl = "{{ deleteUrl }}"
+    const columns = {{ columns| safe
+  }}
+    setTBody({ url, columns, updateUrl, deleteUrl });
+});
+</script>
+{% endblock %}

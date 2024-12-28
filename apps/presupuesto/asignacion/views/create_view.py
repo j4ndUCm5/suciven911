@@ -10,18 +10,18 @@ from ..services import AsignacionService
 class AsignacionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = AsignacionForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_asignacion.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Presupuesto"
-        context["submodule"] = "Asignaciones"
+        context["submodule"] = "Asignacion"
         context["titleForm"] = "Añadir una asignacion"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("asignaciones:list")
-        context["urlForm"] = reverse_lazy("api_asignaciones:create")
+        context["listUrl"] = reverse_lazy("asignacion:list")
+        context["urlForm"] = reverse_lazy("api_asignacion:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 

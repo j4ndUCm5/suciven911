@@ -7,14 +7,15 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 from ..services import GestionService
+from ..models import Gestion
 
 class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
-    template_name = "sneat/layout/partials/data-table/layout.html"
+    template_name = "sneat/layout/partials/data-table/gestion.html"
 
     def get_context_data(self, **kwargs):
-        columns = self.getColumns()
+        columns = Gestion.objects.all()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Protección y Seguridad Integral"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -26,82 +27,8 @@ class GestionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["updateUrl"] = reverse_lazy("gestion:update", args=[0])
         context["deleteUrl"] = reverse_lazy("gestion:delete", args=[0])
         context["heads"] = columns
-        context["columns"] = mark_safe(json.dumps(columns))
+        context["columns"] = columns
         return TemplateLayout.init(self, context)
-
-    def getColumns(self):
-        return [
-            {
-                "data": "id",
-                "name": "id",
-                "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "name",
-                "name": "name",
-                "title": "Nombre",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "apellido",
-                "name": "apellido",
-                "title": "Apellido",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cedula",
-                "name": "cedula",
-                "title": "Cédula",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "direccion",
-                "name": "direccion",
-                "title": "Dirección",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "tipo",
-                "name": "tipo",
-                "title": "Tipo de Incidente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "descripcion",
-                "name": "descripcion",
-                "title": "Descripción",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fecha",
-                "name": "fecha",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "hora",
-                "name": "hora",
-                "title": "Hora",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "cargo",
-                "name": "cargo",
-                "title": "Cargo",
-                "orderable": "false",
-                "searchable": "false",
-            },
-        ]
 
 class GestionListApiView(ListController, CheckPermisosMixin):
     permission_required = ""

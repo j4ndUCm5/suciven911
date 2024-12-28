@@ -10,7 +10,7 @@ from ..services import VehiculoService
 class VehiculoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = VehiculoForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_vehiculos.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

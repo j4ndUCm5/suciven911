@@ -10,7 +10,7 @@ from ..services import ProyectoService
 class ProyectoCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = ProyectoForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_proyecto.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

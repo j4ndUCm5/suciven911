@@ -10,7 +10,7 @@ from ..services import ReceptorService
 class ReceptorCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = ReceptorForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_receptor.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -10,7 +10,7 @@ from templates.sneat import TemplateLayout
 class EntradaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = EntradaForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_entradas.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

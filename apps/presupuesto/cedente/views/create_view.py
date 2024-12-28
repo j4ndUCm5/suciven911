@@ -10,7 +10,7 @@ from ..services import CedenteService
 class CedenteCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = CedenteForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_cedente.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,8 +20,8 @@ class CedenteCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["submodule"] = "Cedentes"
         context["titleForm"] = "Añadir una cedente"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("cedentes:list")
-        context["urlForm"] = reverse_lazy("api_cedentes:create")
+        context["listUrl"] = reverse_lazy("cedente:list")
+        context["urlForm"] = reverse_lazy("api_cedente:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 

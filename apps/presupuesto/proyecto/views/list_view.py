@@ -7,14 +7,15 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 from ..services import ProyectoService
+from ..models import Proyecto
 
 class ProyectoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
-    template_name = "sneat/layout/partials/data-table/layout.html"
+    template_name = "sneat/layout/partials/data-table/proyecto.html"
 
     def get_context_data(self, **kwargs):
-        columns = self.getColumns()
+        columns = Proyecto.objects.all()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -26,90 +27,10 @@ class ProyectoListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["updateUrl"] = reverse_lazy("proyecto:update", args=[0])
         context["deleteUrl"] = reverse_lazy("proyecto:delete", args=[0])
         context["exportPdfUrl"] = reverse_lazy("api_proyecto:export_pdf")
+        context["exportPdfUrl"] = reverse_lazy("api_cedente:export_pdf")
         context["heads"] = columns
-        context["columns"] = mark_safe(json.dumps(columns))
+        context["columns"] = columns
         return TemplateLayout.init(self, context)
-
-    def getColumns(self):
-        return [
-            {
-                "data": "id",
-                "name": "id",
-                "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "nombrep",
-                "name": "nombrep",
-                "title": "Nombre",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fechai",
-                "name": "fechai",
-                "title": "Fecha de Inicio",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fechac",
-                "name": "fechac",
-                "title": "Fec ha de Culminación",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "situacionp",
-                "name": "situacionp",
-                "title": "Situación Presupuestaria",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "montoproyecto",
-                "name": "montoproyecto",
-                "title": "Monto Total del Proyecto",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "responsableg",
-                "name": "responsableg",
-                "title": "Gerente Responsable",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "responsablet",
-                "name": "responsablet",
-                "title": "Técnico Responsable",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "responsabler",
-                "name": "responsabler",
-                "title": "Registrador Responsable",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "responsablea",
-                "name": "responsablea",
-                "title": "Responsable Administrativo",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "estatus",
-                "name": "estatus",
-                "title": "Estatus",
-                "orderable": "false",
-                "searchable": "false",
-            },
-        ]
 
 class ProyectoListApiView(ListController, CheckPermisosMixin):
     permission_required = ""

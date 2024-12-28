@@ -1,5 +1,7 @@
 from django.urls import include, path
 from .views import OrganizacionView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path("", OrganizacionView.as_view(), name="organizacion",),
@@ -8,3 +10,4 @@ urlpatterns = [
     path("normativas/", include(("apps.organizacion.normativas.urls", "normativas"))),
     path("api/normativas/",include(("apps.organizacion.normativas.urls_apis", "api_normativas")),),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

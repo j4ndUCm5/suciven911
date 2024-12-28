@@ -7,19 +7,20 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 from ..services import AsignacionService
+from ..models import Asignacion
 
 class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
-    template_name = "sneat/layout/partials/data-table/layout.html"
+    template_name = "sneat/layout/partials/data-table/asignacion.html"
 
     def get_context_data(self, **kwargs):
-        columns = self.getColumns()
+        columns = Asignacion.objects.all()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Presupuesto"
-        context["submodule"] = "Asignaciones"
+        context["submodule"] = "Asignacion"
         context["createBtn"] = "Añadir"
         context["createUrl"] = reverse_lazy("asignacion:create")
         context["listApiUrl"] = reverse_lazy("api_asignacion:list")
@@ -27,40 +28,8 @@ class AsignacionListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["deleteUrl"] = reverse_lazy("asignacion:delete", args=[0])
         context["exportPdfUrl"] = reverse_lazy("api_asignacion:export_pdf")
         context["heads"] = columns
-        context["columns"] = mark_safe(json.dumps(columns))
+        context["columns"] = columns
         return TemplateLayout.init(self, context)
-
-    def getColumns(self):
-        return [
-            {
-                "data": "nombredir",
-                "name": "nombredir",
-                "title": "Nombre de la Dirección",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "presuasig",
-                "name": "presuasig",
-                "title": "Presupuesto Asignado",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "objeanual",
-                "name": "objeanual",
-                "title": "Objetivo General Anual",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "numpartida",
-                "name": "numpartida",
-                "title": "Número de Partida",
-                "orderable": "false",
-                "searchable": "true",
-            },
-        ]
 
 class AsignacionListApiView(ListController, CheckPermisosMixin):
     permission_required = ""

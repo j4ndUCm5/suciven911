@@ -7,14 +7,15 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 from ..services import CedenteService
+from ..models import Cedente
 
 class CedenteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
-    template_name = "sneat/layout/partials/data-table/layout.html"
+    template_name = "sneat/layout/partials/data-table/cedente.html"
 
     def get_context_data(self, **kwargs):
-        columns = self.getColumns()
+        columns = Cedente.objects.all()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -27,96 +28,8 @@ class CedenteListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["deleteUrl"] = reverse_lazy("cedente:delete", args=[0])
         context["exportPdfUrl"] = reverse_lazy("api_cedente:export_pdf")
         context["heads"] = columns
-        context["columns"] = mark_safe(json.dumps(columns))
+        context["columns"] = columns
         return TemplateLayout.init(self, context)
-
-    def getColumns(self):
-        return [
-            {
-                "data": "idc",
-                "name": "idc",
-                "title": "Identificador Cedente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "partidac",
-                "name": "partidac",
-                "title": "Número de Partida",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "generalc",
-                "name": "generalc",
-                "title": "General",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "espefc",
-                "name": "espefc",
-                "title": "Específicaciones",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "subespefc",
-                "name": "subespefc",
-                "title": "Sub-Especialidad",
-                "orderable": "false",
-                "searchable": "true",
-            },
-            {
-                "data": "denomc",
-                "name": "denomc",
-                "title": "Denominación cedente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "presuacorc",
-                "name": "presuacorc",
-                "title": "Presupuesto Acordado",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "caufechac",
-                "name": "caufechac",
-                "title": "Causado a la Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "dispc",
-                "name": "dispc",
-                "title": "Disponible a Causar",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "montocc",
-                "name": "montocc",
-                "title": "Monto a Ceder",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "saldofc",
-                "name": "saldofc",
-                "title": "Saldo Final",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "direccionc",
-                "name": "direccionc",
-                "title": "Dirección Cedente",
-                "orderable": "false",
-                "searchable": "false",
-            },
-        ]
 
 class CedenteListApiView(ListController, CheckPermisosMixin):
     permission_required = ""

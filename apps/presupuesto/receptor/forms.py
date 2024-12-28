@@ -5,7 +5,6 @@ class ReceptorForm(forms.ModelForm):
     class Meta:
         model = Receptor
         fields = [
-            "idr",
             "partidar",
             "generalr",
             "espefr",

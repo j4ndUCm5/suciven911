@@ -10,7 +10,7 @@ from ..services import SalidaService
 class SalidaCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = SalidaForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_salidas.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
