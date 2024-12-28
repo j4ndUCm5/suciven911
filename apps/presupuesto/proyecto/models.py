@@ -23,4 +23,3 @@ class Proyecto(BaseModel):
     class Meta:
         verbose_name = "Proyecto"
         verbose_name_plural = "Proyectos"
-        app_label = 'presupuesto'

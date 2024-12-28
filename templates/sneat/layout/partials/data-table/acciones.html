@@ -48,26 +48,32 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Mes</th>
-            <th>Estado</th>
-            <th>Informativa</th>
-            <th>Falsa</th>
-            <th>Llamadas Reales No Efectivas</th>
-            <th>Llamadas Reales Efectivas</th>
-            <th>Video Protección</th>
+            <th>Nombre de Proyecto</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Culminación</th>
+            <th>Situación Presupuestaria</th>
+            <th>Monto del Proyecto</th>
+            <th>Responsable Gerente</th>
+            <th>Responsable Técnico</th>
+            <th>Responsable Registrador</th>
+            <th>Responsable Administrativo</th>
+            <th>Estatus del Proyecto</th>
           </tr>
         </thead>
         <tbody class=" table-border-bottom-0">
           {% for archivo in columns %}
           <tr>
             <td>{{ archivo.id }}</td>
-            <td>{{ archivo.mes }}</td>
-            <td>{{ archivo.estado }}</td>
-            <td>{{ archivo.informativa }}</td>
-            <td>{{ archivo.falsa }}</td>
-            <td>{{ archivo.realesno }}</td>
-            <td>{{ archivo.realesf }}</td>
-            <td>{{ archivo.videop }}</td>
+            <td>{{ archivo.nombrep }}</td>
+            <td>{{ archivo.fechai }}</td>
+            <td>{{ archivo.fechac }}</td>
+            <td>{{ archivo.situacionp }}</td>
+            <td>{{ archivo.montoproyecto }}</td>
+            <td>{{ archivo.responsableg }}</td>
+            <td>{{ archivo.responsablet }}</td>
+            <td>{{ archivo.responsabler }}</td>
+            <td>{{ archivo.responsablea }}</td>
+            <td>{{ archivo.estatus }}</td>
           </tr>
           {% endfor %}
         </tbody>

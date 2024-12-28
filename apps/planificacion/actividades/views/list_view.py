@@ -7,14 +7,15 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import ListController
 from templates.sneat import TemplateLayout
 from ..services import ActividadService
+from ..models import Actividad
 
 class ActividadListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
     permission_required = ""
     url_redirect = reverse_lazy("modules:index")
-    template_name = "sneat/layout/partials/data-table/layout.html"
+    template_name = "sneat/layout/partials/data-table/actividades.html"
 
     def get_context_data(self, **kwargs):
-        columns = self.getColumns()
+        columns = Actividad.objects.all()
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -26,47 +27,8 @@ class ActividadListView(LoginRequiredMixin, CheckPermisosMixin, TemplateView):
         context["updateUrl"] = reverse_lazy("actividades:update", args=[0])
         context["deleteUrl"] = reverse_lazy("actividades:delete", args=[0])
         context["heads"] = columns
-        context["columns"] = mark_safe(json.dumps(columns))
+        context["columns"] = columns
         return TemplateLayout.init(self, context)
-
-    def getColumns(self):
-        return [
-            {
-                "data": "id",
-                "name": "id",
-                "title": "ID",
-                "orderable": "true",
-                "searchable": "true",
-            },
-            {
-                "data": "fechai",
-                "name": "fechai",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "fechaf",
-                "name": "fechaf",
-                "title": "Fecha",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "objetiv",
-                "name": "objetiv",
-                "title": "Objetivo",
-                "orderable": "false",
-                "searchable": "false",
-            },
-            {
-                "data": "meta",
-                "name": "meta",
-                "title": "Meta",
-                "orderable": "false",
-                "searchable": "true",
-            },
-        ]
 
 class ActividadListApiView(ListController, CheckPermisosMixin):
     permission_required = ""

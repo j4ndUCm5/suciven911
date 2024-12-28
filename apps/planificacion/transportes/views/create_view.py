@@ -5,14 +5,13 @@ from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import CreateController
 from planificacion.transportes.forms import TransporteForm
 from planificacion.transportes.services import TransporteService
-
 from templates.sneat import TemplateLayout
 
 
 class TransporteCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = TransporteForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_transporte.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

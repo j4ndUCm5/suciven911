@@ -10,7 +10,7 @@ from ..services import AccionService
 class AccionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = AccionForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_acciones.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,8 +20,8 @@ class AccionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
         context["submodule"] = "Acciones"
         context["titleForm"] = "Añadir una accion"
         context["tag"] = "Registrar"
-        context["listUrl"] = reverse_lazy("accion:list")
-        context["urlForm"] = reverse_lazy("api_accion:create")
+        context["listUrl"] = reverse_lazy("acciones:list")
+        context["urlForm"] = reverse_lazy("api_acciones:create")
         context["methodForm"] = "POST"
         return TemplateLayout.init(self, context)
 

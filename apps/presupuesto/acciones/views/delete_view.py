@@ -20,7 +20,7 @@ class AccionDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "Accion"
         context["titleForm"] = "Eliminar accion"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("accion:list")
+        context["listUrl"] = reverse_lazy("acciones:list")
         context["urlDelete"] = reverse_lazy(
             "api_accion:delete", args=[self.kwargs.get("pk")]
         )

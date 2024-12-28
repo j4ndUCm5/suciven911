@@ -25,4 +25,3 @@ class Cedente(BaseModel):
     class Meta:
         verbose_name = "Cedente"
         verbose_name_plural = "Cedentes"
-        app_label = 'presupuesto'

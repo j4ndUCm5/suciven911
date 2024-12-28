@@ -17,4 +17,3 @@ class Asignacion(BaseModel):
     class Meta:
         verbose_name = "Asignacion"
         verbose_name_plural = "Asignaciones"
-        app_label = 'presupuesto'

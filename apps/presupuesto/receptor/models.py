@@ -25,4 +25,3 @@ class Receptor(BaseModel):
     class Meta:
         verbose_name = "Receptor"
         verbose_name_plural = "Receptores"
-        app_label = 'presupuesto'

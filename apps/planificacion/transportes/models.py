@@ -5,7 +5,7 @@ from helpers.models import Estado
 
 class Transporte(BaseModel):
     mes = models.CharField(max_length=64, verbose_name="Mes:", default="")
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
+    estado = models.CharField(max_length=64, verbose_name="Estado:", default="")
     transporte = models.CharField(max_length=64, verbose_name="Transporte:", default="")
     cantidad = models.CharField(max_length=64, verbose_name="Cantidad:", default="")
 

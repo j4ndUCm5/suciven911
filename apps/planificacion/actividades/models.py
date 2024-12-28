@@ -2,7 +2,6 @@ from django.db import models
 from django.forms import model_to_dict
 from helpers.BaseModelMixin import BaseModel
 
-
 class Actividad(BaseModel):
     fechai = models.DateField(verbose_name="Fecha de Inicio")
     fechaf = models.DateField(verbose_name="Fecha Final")

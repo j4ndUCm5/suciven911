@@ -23,4 +23,3 @@ class Accion(BaseModel):
     class Meta:
         verbose_name = "Accion"
         verbose_name_plural = "Acciones"
-        app_label = 'presupuesto'

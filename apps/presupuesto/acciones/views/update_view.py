@@ -21,7 +21,7 @@ class AccionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["submodule"] = "Accion"
         context["titleForm"] = "Actualizar accion"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("accion:list")
+        context["listUrl"] = reverse_lazy("acciones:list")
         context["urlForm"] = reverse_lazy(
             "api_accion:update", args=[self.kwargs.get("pk")]
         )
