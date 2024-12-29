@@ -18,12 +18,12 @@ class AsignacionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
         context["module"] = "Presupuesto"
-        context["submodule"] = "Asignaciones"
+        context["submodule"] = "Asignacion"
         context["titleForm"] = "Actualizar accion"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("acciones:list")
+        context["listUrl"] = reverse_lazy("asignacion:list")
         context["urlForm"] = reverse_lazy(
-            "api_acciones:update", args=[self.kwargs.get("pk")]
+            "api_asignacion:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
         return TemplateLayout.init(self, context)

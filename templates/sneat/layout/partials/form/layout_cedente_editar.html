@@ -24,18 +24,19 @@
         <form id="form" novalidate enctype="multipart/form-data">
           {% csrf_token %}
 
+          {% for field in formu %}
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Partida</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.partidar.html_name }}">
+              <input type="text" name="{{ form.partidac.html_name }}" value="{{ field.partidac }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
-
+          
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">General</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.generalr.html_name }}">
+              <input type="text" name="{{ form.generalc.html_name }}" value="{{ field.generalc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
@@ -43,23 +44,23 @@
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Especificaciones</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.espefr.html_name }}">
+              <input type="text" name="{{ form.espefc.html_name }}" value="{{ field.espefc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Sub-Especialidad</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Sub-Especificaciones</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.subespefr.html_name }}">
+              <input type="text" name="{{ form.subespefc.html_name }}" value="{{ field.subespefc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Denominación</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Denominaciones</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.denomr.html_name }}">
+              <input type="text" name="{{ form.denomc.html_name }}" value="{{ field.denomc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
@@ -67,7 +68,7 @@
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Presupuesto Acordado</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.presuacorr.html_name }}">
+              <input type="text" name="{{ form.presuacorc.html_name }}" value="{{ field.presuacorc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
@@ -75,7 +76,7 @@
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Causado a la Fecha</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.caufechar.html_name }}">
+              <input type="text" name="{{ form.caufechac.html_name }}" value="{{ field.caufechac }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
@@ -83,15 +84,15 @@
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Disponible a Causar</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.dispr.html_name }}">
+              <input type="text" name="{{ form.dispc.html_name }}" value="{{ field.dispc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Monto</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Monto a Ceder</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.montocr.html_name }}">
+              <input type="text" name="{{ form.montocc.html_name }}" value="{{ field.montocc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
@@ -99,22 +100,24 @@
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Saldo Final</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.saldofr.html_name }}">
+              <input type="text" name="{{ form.saldofc.html_name }}" value="{{ field.saldofc }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
-
+          
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Dirección Receptora</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Dirección Cedente</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.direccionr.html_name }}">
-                <option selected disabled value="">Seleccione una opción</option>
+              <select name="{{ form.direccionc.html_name }}">
+                <option selected value="{{ field.direccionc }}">{{ field.direccionc }}</option>
+                <option disabled value="">======================</option>
                 <option value="Administración">Administración</option>
                 <option value="Planificación, Organización y Presupuesto">Planificación, Organización y Presupuesto</option>
               </select>
               <div class="invalid-feedback"></div>
             </div>
           </div>
+          {% endfor %}
 
           <div class="d-flex gap-2 justify-content-end">
             <button type="submit" class="btn btn-primary">

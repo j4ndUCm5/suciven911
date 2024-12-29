@@ -11,9 +11,11 @@ from ..services import CedenteService
 class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
     form_class = CedenteForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_cedente_editar.html"
 
     def get_context_data(self, **kwargs):
+        id = self.kwargs.get("pk")
+        data = Cedente.objects.filter(pk=id).all
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -21,11 +23,12 @@ class CedenteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["submodule"] = "Cedentes"
         context["titleForm"] = "Actualizar cedente"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("cedentes:list")
+        context["listUrl"] = reverse_lazy("cedente:list")
         context["urlForm"] = reverse_lazy(
-            "api_cedentes:update", args=[self.kwargs.get("pk")]
+            "api_cedente:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
+        context["formu"] = data
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):

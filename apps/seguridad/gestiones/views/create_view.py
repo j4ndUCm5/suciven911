@@ -10,7 +10,7 @@ from ..services import GestionService
 class GestionCreateView(LoginRequiredMixin, CheckPermisosMixin, CreateView):
     permission_required = ""
     form_class = GestionForm
-    template_name = "sneat/layout/partials/form/layout_gestion.html"
+    template_name = "sneat/layout/partials/form/layout.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

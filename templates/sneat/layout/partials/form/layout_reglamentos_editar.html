@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-<span class="text-muted fw-light"><a href="../" class="text-muted fw-light">{{ module }}</a> /</span>
+<span class="text-muted fw-light"><a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /</span>
 <span class="text-muted fw-light"><a href="{{ listUrl }}" class="text-muted fw-light">{{ submodule }}</a> /</span>
 <span class="">{{ tag }}</span>
 {% endblock %}
@@ -23,98 +23,61 @@
       <div class="card-body">
         <form id="form" novalidate enctype="multipart/form-data">
           {% csrf_token %}
-
+          
+          {% for field in formu %}
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Partida</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Nombre Reglamento</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.partidar.html_name }}">
+              <input type="text" name="{{ form.name.html_name }}" value="{{ field.name }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">General</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Archivo</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.generalr.html_name }}">
+              <input type="file" name="{{ form.file.html_name }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Especificaciones</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Usuario</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.espefr.html_name }}">
+              <input type="text" name="{{ form.user.html_name }}" value="{{ field.user }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Sub-Especialidad</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Fecha</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.subespefr.html_name }}">
+              <input type="date" name="{{ form.date.html_name }}" value="{{ field.date|date:"Y-m-d" }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Denominación</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Progreso</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.denomr.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Presupuesto Acordado</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.presuacorr.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Causado a la Fecha</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.caufechar.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Disponible a Causar</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.dispr.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Monto</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.montocr.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Saldo Final</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.saldofr.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Dirección Receptora</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.direccionr.html_name }}">
-                <option selected disabled value="">Seleccione una opción</option>
-                <option value="Administración">Administración</option>
-                <option value="Planificación, Organización y Presupuesto">Planificación, Organización y Presupuesto</option>
+              <select name="{{ form.progre.html_name }}">
+                <option selected value="{{ field.progre }}">{{ field.progre }}</option>
+                <option disabled value="">======================</option>
+                <option value="10%">10%</option>
+                <option value="10%">20%</option>
+                <option value="10%">30%</option>
+                <option value="10%">40%</option>
+                <option value="10%">50%</option>
+                <option value="10%">60%</option>
+                <option value="10%">70%</option>
+                <option value="10%">80%</option>
+                <option value="10%">90%</option>
+                <option value="10%">100%</option>
               </select>
               <div class="invalid-feedback"></div>
             </div>
           </div>
+          {% endfor %}
 
           <div class="d-flex gap-2 justify-content-end">
             <button type="submit" class="btn btn-primary">

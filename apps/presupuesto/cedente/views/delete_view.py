@@ -23,9 +23,9 @@ class CedenteDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "Cedentes"
         context["titleForm"] = "Eliminar cedente"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("cedentes:list")
+        context["listUrl"] = reverse_lazy("cedente:list")
         context["urlDelete"] = reverse_lazy(
-            "api_cedentes:delete", args=[self.kwargs.get("pk")]
+            "api_cedente:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 

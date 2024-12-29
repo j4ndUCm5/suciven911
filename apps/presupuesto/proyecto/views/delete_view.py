@@ -20,9 +20,9 @@ class ProyectoDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
         context["submodule"] = "Proyectos"
         context["titleForm"] = "Eliminar proyecto"
         context["tag"] = "Eliminar"
-        context["listUrl"] = reverse_lazy("proyectos:list")
+        context["listUrl"] = reverse_lazy("proyecto:list")
         context["urlDelete"] = reverse_lazy(
-            "api_proyectos:delete", args=[self.kwargs.get("pk")]
+            "api_proyecto:delete", args=[self.kwargs.get("pk")]
         )
         return TemplateLayout.init(self, context)
 

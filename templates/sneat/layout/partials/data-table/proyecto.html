@@ -58,6 +58,7 @@
             <th>Responsable Registrador</th>
             <th>Responsable Administrativo</th>
             <th>Estatus del Proyecto</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody class=" table-border-bottom-0">
@@ -74,6 +75,10 @@
             <td>{{ archivo.responsabler }}</td>
             <td>{{ archivo.responsablea }}</td>
             <td>{{ archivo.estatus }}</td>
+            <td>
+              <a href="{{ archivo.id }}/update" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
+              <a href="{{ archivo.id }}/delete" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

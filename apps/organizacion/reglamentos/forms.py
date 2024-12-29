@@ -1,9 +1,8 @@
 from django import forms
-from django.forms.fields import DateTimeInput
-from organizacion.reglamentos.models import Reglamento
-
+from .models import Reglamento
 
 class ReglamentoForm(forms.ModelForm):
+    date = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
     class Meta:
         model = Reglamento
         fields = [
@@ -22,6 +21,3 @@ class ReglamentoForm(forms.ModelForm):
             "deleted_at",
             "deleted_by",
         ]
-        widgets = {
-            "date": DateTimeInput(attrs={"type": "date"}),
-        }

@@ -52,6 +52,7 @@
             <th>Presupuesto Asignado</th>
             <th>Objetivo General Anual</th>
             <th>Número de Partida</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody class=" table-border-bottom-0">
@@ -62,6 +63,10 @@
             <td>{{ archivo.presuasig }}</td>
             <td>{{ archivo.objeanual }}</td>
             <td>{{ archivo.numpartida }}</td>
+            <td>
+              <a href="{{ archivo.id }}/update" class="btn btn-warning btn-xs btn-flat me-2"><i class="bx bx-edit-alt"></i></a>
+              <a href="{{ archivo.id }}/delete" type="button" class="btn btn-danger btn-xs btn-flat"><i class="bx bx-trash"></i></a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

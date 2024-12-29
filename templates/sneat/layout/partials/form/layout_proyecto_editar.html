@@ -24,97 +24,93 @@
         <form id="form" novalidate enctype="multipart/form-data">
           {% csrf_token %}
 
+          {% for field in formu %}
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Partida</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Nombre del Proyecto</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.partidar.html_name }}">
+              <input type="text" name="{{ form.nombrep.html_name }}" value="{{ field.nombrep }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">General</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Fecha de Inicio</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.generalr.html_name }}">
+              <input type="date" name="{{ form.fechai.html_name }}" value="{{ field.fechai|date:"Y-m-d" }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Especificaciones</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Fecha de Culminación</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.espefr.html_name }}">
+              <input type="date" name="{{ form.fechac.html_name }}" value="{{ field.fechac|date:"Y-m-d" }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Sub-Especialidad</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Situación Presupuestaria</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.subespefr.html_name }}">
+              <input type="text" name="{{ form.situacionp.html_name }}" value="{{ field.situacionp }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Denominación</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Monto Proyecto</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.denomr.html_name }}">
+              <input type="text" name="{{ form.montoproyecto.html_name }}" value="{{ field.montoproyecto }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Presupuesto Acordado</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Responsable Gerente</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.presuacorr.html_name }}">
+              <input type="text" name="{{ form.responsableg.html_name }}" value="{{ field.responsableg }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Causado a la Fecha</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Responsable Técnico</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.caufechar.html_name }}">
+              <input type="text" name="{{ form.responsablet.html_name }}" value="{{ field.responsablet }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Disponible a Causar</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Responsable Registrador</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.dispr.html_name }}">
+              <input type="text" name="{{ form.responsabler.html_name }}" value="{{ field.responsabler }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Monto</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Responsable Administrativo</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.montocr.html_name }}">
+              <input type="text" name="{{ form.responsablea.html_name }}" value="{{ field.responsablea }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Saldo Final</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Estatus del Proyecto</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="text" name="{{ form.saldofr.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Dirección Receptora</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.direccionr.html_name }}">
-                <option selected disabled value="">Seleccione una opción</option>
-                <option value="Administración">Administración</option>
-                <option value="Planificación, Organización y Presupuesto">Planificación, Organización y Presupuesto</option>
+              <select name="{{ form.estatus.html_name }}">
+                <option selected value="{{ field.estatus }}">{{ field.estatus }}</option>
+                <option disabled value="">======================</option>
+                <option value="Aprobado">Aprobado</option>
+                <option value="Negado">Negado</option>
+                <option value="En Proceso">En Proceso</option>
               </select>
               <div class="invalid-feedback"></div>
             </div>
           </div>
+          {% endfor %}
 
           <div class="d-flex gap-2 justify-content-end">
             <button type="submit" class="btn btn-primary">

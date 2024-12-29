@@ -11,9 +11,11 @@ from ..services import AccionService
 class AccionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
     form_class = AccionForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_acciones_editar.html"
 
     def get_context_data(self, **kwargs):
+        id = self.kwargs.get("pk")
+        data = Accion.objects.filter(pk=id).all
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Presupuesto"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -23,9 +25,10 @@ class AccionUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
         context["tag"] = "Editar"
         context["listUrl"] = reverse_lazy("acciones:list")
         context["urlForm"] = reverse_lazy(
-            "api_accion:update", args=[self.kwargs.get("pk")]
+            "api_acciones:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
+        context["formu"] = data
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
