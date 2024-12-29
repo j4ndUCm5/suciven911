@@ -6,9 +6,7 @@ from helpers.ControllerMixin import DeleteController
 from planificacion.llamadas.forms import LlamadaForm
 from planificacion.llamadas.models import Llamada
 from planificacion.llamadas.services import LlamadaService
-
 from templates.sneat import TemplateLayout
-
 
 class LlamadaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
     permission_required = ""
@@ -31,7 +29,6 @@ class LlamadaDeleteView(LoginRequiredMixin, CheckPermisosMixin, DeleteView):
     def get_queryset(self):
         id = self.kwargs.get("pk")
         return Llamada.objects.filter(pk=id)
-
 
 class LlamadaDeleteApiView(DeleteController, CheckPermisosMixin):
     permission_required = ""

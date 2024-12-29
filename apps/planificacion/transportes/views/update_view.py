@@ -3,20 +3,19 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
-
 from templates.sneat import TemplateLayout
-
 from ..forms import TransporteForm
 from ..models import Transporte
 from ..services import TransporteService
 
-
 class TransporteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
     form_class = TransporteForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_transporte_editar.html"
 
     def get_context_data(self, **kwargs):
+        id = self.kwargs.get("pk")
+        data = Transporte.objects.filter(pk=id).all
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -29,6 +28,7 @@ class TransporteUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
             "api_transportes:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
+        context["formu"] = data
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):

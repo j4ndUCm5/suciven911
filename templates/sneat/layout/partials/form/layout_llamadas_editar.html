@@ -24,22 +24,13 @@
         <form id="form" novalidate enctype="multipart/form-data">
           {% csrf_token %}
 
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Estado</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.estado.html_name }}">
-                <option value="Distrito Capital">Distrito Capital</option>
-                <option value="Miranda">Miranda</option>
-              </select>
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
+          {% for field in formu %}
           <div class="row mb-3">
             <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Mes</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
               <select name="{{ form.mes.html_name }}">
-                <option selected disabled value="">Seleccione una opción</option>
+                <option selected value="{{ field.mes }}">{{ field.mes }}</option>
+                <option disabled value="">======================</option>
                 <option value="Enero">Enero</option>
                 <option value="Febrero">Febrero</option>
                 <option value="Marzo">Marzo</option>
@@ -58,27 +49,59 @@
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Infraestructura</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Estado</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.infraestructura.html_name }}">
-                <option selected disabled value="">Seleccione una opción</option>
-                <option value="Mantenimiento general eléctrico">Mantenimiento general eléctrico</option>
-                <option value="Mantenimiento de plantas eléctricas">Mantenimiento de plantas eléctricas</option>
-                <option value="Reparación y mantenimiento de equipos UPS y ATS">Reparación y mantenimiento de equipos UPS y ATS</option>
-                <option value="Mantenimiento correctivo y preventivo de aires">Mantenimiento correctivo y preventivo de aires</option>
+              <select name="{{ form.estado.html_name }}">
+                <option selected value="{{ field.estado }}">{{ field.estado }}</option>
+                <option disabled value="">======================</option>
+                <option value="Distrito Capital">Distrito Capital</option>
+                <option value="Miranda">Miranda</option>
               </select>
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Cantidad</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Informativa</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="number" name="{{ form.cantidad.html_name }}">
+              <input type="number" name="{{ form.informativa.html_name }}" value="{{ field.informativa }}">
               <div class="invalid-feedback"></div>
             </div>
           </div>
 
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Falsa</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <input type="number" name="{{ form.falsa.html_name }}" value="{{ field.falsa }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Reales no Efectivas</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <input type="number" name="{{ form.realesno.html_name }}" value="{{ field.realesno }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Reales Efectivas</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <input type="number" name="{{ form.realesf.html_name }}" value="{{ field.realesf }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Videos Protección</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <input type="number" name="{{ form.videop.html_name }}" value="{{ field.videop }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+          {% endfor %}
+          
           <div class="d-flex gap-2 justify-content-end">
             <button type="submit" class="btn btn-primary">
               <i class="bx bx-save scaleX-n1-rtl bx-sm me-1"></i>

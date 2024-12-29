@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-<span class="text-muted fw-light"><a href="../" class="text-muted fw-light">{{ module }}</a> /</span>
+<span class="text-muted fw-light"><a href="{{ indexUrl }}" class="text-muted fw-light">{{ module }}</a> /</span>
 <span class="text-muted fw-light"><a href="{{ listUrl }}" class="text-muted fw-light">{{ submodule }}</a> /</span>
 <span class="">{{ tag }}</span>
 {% endblock %}
@@ -23,61 +23,61 @@
       <div class="card-body">
         <form id="form" novalidate enctype="multipart/form-data">
           {% csrf_token %}
+          
+          {% for field in formu %}
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Nombre Normativa</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <input type="text" name="{{ form.name.html_name }}" value="{{ field.name }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
 
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Estado</label>
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Archivo</label>
             <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.estado.html_name }}">
-                <option value="Distrito Capital">Distrito Capital</option>
-                <option value="Miranda">Miranda</option>
+              <input type="file" name="{{ form.file.html_name }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Usuario</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <input type="text" name="{{ form.user.html_name }}" value="{{ field.user }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Fecha</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <input type="date" name="{{ form.date.html_name }}" value="{{ field.date|date:"Y-m-d" }}">
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Progreso</label>
+            <div class="col-10 col-md-8 col-sm-12 align-content-center">
+              <select name="{{ form.progre.html_name }}">
+                <option selected value="{{ field.progre }}">{{ field.progre }}</option>
+                <option disabled value="">======================</option>
+                <option value="10%">10%</option>
+                <option value="10%">20%</option>
+                <option value="10%">30%</option>
+                <option value="10%">40%</option>
+                <option value="10%">50%</option>
+                <option value="10%">60%</option>
+                <option value="10%">70%</option>
+                <option value="10%">80%</option>
+                <option value="10%">90%</option>
+                <option value="10%">100%</option>
               </select>
               <div class="invalid-feedback"></div>
             </div>
           </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Mes</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.mes.html_name }}">
-                <option selected disabled value="">Seleccione una opción</option>
-                <option value="Enero">Enero</option>
-                <option value="Febrero">Febrero</option>
-                <option value="Marzo">Marzo</option>
-                <option value="Abril">Abril</option>
-                <option value="Mayo">Mayo</option>
-                <option value="Junio">Junio</option>
-                <option value="Julio">Julio</option>
-                <option value="Agosto">Agosto</option>
-                <option value="Septiembre">Septiembre</option>
-                <option value="Octubre">Octubre</option>
-                <option value="Noviembre">Noviembre</option>
-                <option value="Diciembre">Diciembre</option>
-              </select>
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Infraestructura</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <select name="{{ form.infraestructura.html_name }}">
-                <option selected disabled value="">Seleccione una opción</option>
-                <option value="Mantenimiento general eléctrico">Mantenimiento general eléctrico</option>
-                <option value="Mantenimiento de plantas eléctricas">Mantenimiento de plantas eléctricas</option>
-                <option value="Reparación y mantenimiento de equipos UPS y ATS">Reparación y mantenimiento de equipos UPS y ATS</option>
-                <option value="Mantenimiento correctivo y preventivo de aires">Mantenimiento correctivo y preventivo de aires</option>
-              </select>
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-2 col-md-4 col-sm-12 col-form-label">Cantidad</label>
-            <div class="col-10 col-md-8 col-sm-12 align-content-center">
-              <input type="number" name="{{ form.cantidad.html_name }}">
-              <div class="invalid-feedback"></div>
-            </div>
-          </div>
+          {% endfor %}
 
           <div class="d-flex gap-2 justify-content-end">
             <button type="submit" class="btn btn-primary">

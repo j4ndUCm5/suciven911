@@ -3,20 +3,19 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 from helpers.CheckPermisosMixin import CheckPermisosMixin
 from helpers.ControllerMixin import UpdateController
-
 from templates.sneat import TemplateLayout
-
 from ..forms import ObjetivoForm
 from ..models import Objetivo
 from ..services import ObjetivoService
 
-
 class ObjetivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
     form_class = ObjetivoForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_objetivos_editar.html"
 
     def get_context_data(self, **kwargs):
+        id = self.kwargs.get("pk")
+        data = Objetivo.objects.filter(pk=id).all
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificación"
         context["indexUrl"] = reverse_lazy("modules:index")
@@ -29,6 +28,7 @@ class ObjetivoUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
             "api_objetivos:update", args=[self.kwargs.get("pk")]
         )
         context["methodForm"] = "PUT"
+        context["formu"] = data
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):

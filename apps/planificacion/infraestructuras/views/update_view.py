@@ -11,9 +11,11 @@ from ..services import InfraestructuraService
 class InfraestructuraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateView):
     permission_required = ""
     form_class = InfraestructuraForm
-    template_name = "sneat/layout/partials/form/layout.html"
+    template_name = "sneat/layout/partials/form/layout_infraestructura_editar.html"
 
     def get_context_data(self, **kwargs):
+        id = self.kwargs.get("pk")
+        data = Infraestructura.objects.filter(pk=id).all
         context = super().get_context_data(**kwargs)
         context["titlePage"] = "Planificacion"
         context["indexUrl"] = reverse_lazy("planificacion")
@@ -21,11 +23,12 @@ class InfraestructuraUpdateView(LoginRequiredMixin, CheckPermisosMixin, UpdateVi
         context["submodule"] = "Infraestructura"
         context["titleForm"] = "Actualizar infraestructura"
         context["tag"] = "Editar"
-        context["listUrl"] = reverse_lazy("infraestructura:list")
+        context["listUrl"] = reverse_lazy("infraestructuras:list")
         context["urlForm"] = reverse_lazy(
             "api_infraestructuras:update", args=[self.kwargs.get("pk")]   
             )
         context["methodForm"] = "PUT"
+        context["formu"] = data
         return TemplateLayout.init(self, context)
 
     def get_queryset(self):
